@@ -111,13 +111,16 @@ async function authenticate(username, password) {
 
 async function getInvoices(sessionhash, nocsrftoken) {
     return await requestRaw({
-        url: `${baseUrl}/rechnungen_ajax.php?action=listinvoice&page=1&orderby=&sessionhash=${sessionhash}&nocsrftoken=${nocsrftoken}`,
+        url: `${baseUrl}/rechnungen_ajax.php?action=listInvoice`,
         method: 'POST',
         form: {
             search: '',
             datefrom: '01.01.2000',
             dateto: '01.01.2999',
-            entrysperpage: 50
+            entrysperpage: 50,
+            page: 1,
+            nocsrftoken,
+            sessionhash
         }
     })
 }
