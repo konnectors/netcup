@@ -1,12 +1,21 @@
+process.env.SENTRY_DSN =
+    process.env.SENTRY_DSN ||
+    'https://0deaa610f5d84204ac797bd4b70d74c3@errors.cozycloud.cc/45'
+
 const {
     BaseKonnector,
     requestFactory,
     log,
-    saveBills
+    saveBills,
+    cozyClient
 } = require('cozy-konnector-libs')
 const sleep = require('util').promisify(global.setTimeout)
 let request = requestFactory()
 const jar = request.jar()
+
+const models = cozyClient.new.models
+const { Qualification } = models.document
+
 request = requestFactory({
     // debug: true,
     cheerio: true,
@@ -34,15 +43,12 @@ async function start(fields) {
 
     const sessionhash = invoicePage.html().match(/sessionhash.?=.?"(.+?)"/)[1]
     const nocsrftoken = invoicePage.html().match(/nocsrftoken.?=.?"(.*?)"/)[1]
-    log('debug', sessionhash)
-    log('debug', nocsrftoken)
 
     const res = await getInvoices(sessionhash, nocsrftoken)
     const reg = /(pdf.php.+?)".+?(\d{2}\.\d{2}.\d{4}).+?(-?[\d,]+)/gs
     const pdfurls = []
     let m = []
     while ((m = reg.exec(res))) pdfurls.push(m.slice(1, 4))
-    log('debug', pdfurls)
 
     await saveBills(
         pdfurls.map(([url, date, price]) => {
@@ -69,11 +75,12 @@ async function start(fields) {
                 fileAttributes: {
                     metadata: {
                         carbonCopy: true,
-                        classification: 'invoicing',
+                        classification: Qualification.getByLabel(
+                            'web_service_invoice'
+                        ),
                         datetime: d,
                         datetimeLabel: 'issueDate',
                         contentAuthor: 'netcup',
-                        subClassification: 'payment_statement',
                         issueDate: d,
                         contractReference: fields.username
                     }
@@ -82,7 +89,10 @@ async function start(fields) {
         }),
         fields,
         {
-            linkBankOperations: false
+            linkBankOperations: false,
+            sourceAccountIdentifier: fields.login,
+            sourceAccount: fields.login,
+            identifier: ['Netcup']
         }
     )
 }
