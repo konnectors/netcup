@@ -1,117 +1,111 @@
 {
-    "version": "1.0.0",
-    "name": "Netcup",
-    "type": "konnector",
-    "language": "node",
-    "icon": "icon.svg",
-    "slug": "netcup",
-    "source": "git@github.com:konnectors/netcup.git",
-    "editor": "Cozy",
-    "vendor_link": "https://www.customercontrolpanel.de/",
-    "categories": [
-        "web_service"
-    ],
-    "fields": {
-        "login": {
-            "type": "text"
-        },
-        "password": {
-            "type": "password"
-        }
+  "version": "1.1.0",
+  "name": "Netcup",
+  "type": "konnector",
+  "language": "node",
+  "icon": "icon.svg",
+  "slug": "netcup",
+  "source": "git@github.com:konnectors/netcup.git",
+  "editor": "Cozy",
+  "vendor_link": "https://www.customercontrolpanel.de/",
+  "categories": [
+    "web_service"
+  ],
+  "fields": {
+    "login": {
+      "type": "text"
     },
-    "folders": [
-        {
-            "defaultDir": "$administrative/$konnector/$account"
-        }
-    ],
-    "data_types": [
-        "bill"
-    ],
-    "screenshots": [],
-    "permissions": {
-        "carbon_copy": {
-            "type": "io.cozy.certified.carbon_copy"
+    "password": {
+      "type": "password"
+    }
+  },
+  "folders": [
+    {
+      "defaultDir": "$administrative/$konnector/$account"
+    }
+  ],
+  "data_types": [
+    "bill"
+  ],
+  "screenshots": [],
+  "permissions": {
+    "carbon_copy": {
+      "type": "io.cozy.certified.carbon_copy"
+    },
+    "bank operations": {
+      "type": "io.cozy.bank.operations"
+    },
+    "bills": {
+      "type": "io.cozy.bills"
+    },
+    "files": {
+      "type": "io.cozy.files"
+    },
+    "accounts": {
+      "type": "io.cozy.accounts"
+    }
+  },
+  "developer": {
+    "name": "Théophile Cailliau",
+    "url": "https://theophile.me"
+  },
+  "langs": [
+    "fr",
+    "en"
+  ],
+  "locales": {
+    "fr": {
+      "short_description": "Récupère la liste de vos factures Netcup",
+      "long_description": "Récupère la liste de vos factures Netcup",
+      "permissions": {
+        "carboncopy": {
+          "description": "Utilisé pour certifier que vos fichiers sont copie conforme avec les documents d'origine"
         },
         "bank operations": {
-            "type": "io.cozy.bank.operations"
+          "description": "Utilisé pour lier les factures aux opérations bancaires"
         },
         "bills": {
-            "type": "io.cozy.bills"
+          "description": "Utilisé pour sauvegarder les données des factures"
         },
         "files": {
-            "type": "io.cozy.files"
-        },
-        "carbon_copy": {
-            "type": "io.cozy.certified.carbon_copy"
+          "description": "Utilisé pour sauvegarder les factures"
         },
         "accounts": {
-            "type": "io.cozy.accounts"
+          "description": "Utilisé pour obtenir les données du compte"
         }
+      }
     },
-    "developer": {
-        "name": "Théophile Cailliau",
-        "url": "https://theophile.me"
-    },
-    "langs": [
-        "fr",
-        "en"
-    ],
-    "locales": {
-        "fr": {
-            "short_description": "Récupère la liste de vos factures Netcup",
-            "long_description": "Récupère la liste de vos factures Netcup",
-            "permissions": {
-                "carboncopy": {
-                    "description": "Utilisé pour certifier que vos fichiers sont copie conforme avec les documents d'origine"
-                },
-                "bank operations": {
-                    "description": "Utilisé pour lier les factures aux opérations bancaires"
-                },
-                "bills": {
-                    "description": "Utilisé pour sauvegarder les données des factures"
-                },
-                "files": {
-                    "description": "Utilisé pour sauvegarder les factures"
-                },
-                "accounts": {
-                    "description": "Utilisé pour obtenir les données du compte"
-                }
-            }
+    "en": {
+      "short_description": "Fetch a list of Netcup's invoices",
+      "long_description": "Fetch a list of Netcup's invoices",
+      "permissions": {
+        "carboncopy": {
+          "description": "Required for carbon copy documents"
         },
-        "en": {
-            "short_description": "Fetch a list of Netcup's invoices",
-            "long_description": "Fetch a list of Netcup's invoices",
-            "permissions": {
-                "carboncopy": {
-                    "description": "Required to certify the documents uploaded are carbon copies of the original documents"
-                },
-                "bank operations": {
-                    "description": "Required to link bills to bank operations"
-                },
-                "carboncopy": {
-                    "description": "Required for carbon copy documents"
-                },
-                "bills": {
-                    "description": "Required to save the bills data"
-                },
-                "files": {
-                    "description": "Required to save the bills"
-                },
-                "accounts": {
-                    "description": "Required to get the account's data"
-                }
-            }
+        "bank operations": {
+          "description": "Required to link bills to bank operations"
+        },
+        "bills": {
+          "description": "Required to save the bills data"
+        },
+        "files": {
+          "description": "Required to save the bills"
+        },
+        "accounts": {
+          "description": "Required to get the account's data"
         }
-    },
-    "qualification_labels": [
+      }
+    }
+  },
+  "qualification_labels": [
     "web_service_invoice"
-    ],
-    "features": [
+  ],
+  "features": [
     "LOGIN_OK",
     "METADATA_DEDUP",
     "CARBON_COPY",
     "DOC_QUALIFICATION_V2",
     "SENTRY_V2"
-    ],
-    "manifest_version": "2"
+  ],
+  "manifest_version": "2"
 }
