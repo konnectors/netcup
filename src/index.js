@@ -89,6 +89,7 @@ async function start(fields) {
         }),
         fields,
         {
+            fileIdAttribute: ['filename'],
             linkBankOperations: false,
             sourceAccountIdentifier: fields.login,
             sourceAccount: fields.login,
